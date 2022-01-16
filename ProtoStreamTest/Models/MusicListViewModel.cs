@@ -21,7 +21,7 @@ namespace ProtoStreamTest.Models
         {
             string[] values = csvLine.Split(',');
             MusicListViewModel data = new MusicListViewModel();
-            data.Id = index;
+            data.Id = index++;
             data.Film = values[0];
             data.Genre = values[1];
             data.LeadStudio = values[2];
