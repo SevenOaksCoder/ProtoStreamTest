@@ -31,16 +31,21 @@ namespace ProtoStreamTest.Controllers
         [Route("api/get/{id}")]
         public MusicListViewModel Get(int id)
         {
-            return _records.SingleOrDefault(x => x.Id == id);
+            var record = _records.SingleOrDefault(x => x.Id == id);
+            
+            return record != null ? record : new MusicListViewModel();
         }
 
-        public void Post([FromBody] string value)
+        public void Post([FromBody] MusicListViewModel record)
         {
+            _records.Add(record);
         }
 
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] MusicListViewModel record)
         {
-
+            var modifyRecord = _records.SingleOrDefault(x => x.Id == id);
+            _records.Remove(modifyRecord);
+            _records.Add(record);
         }
 
         [HttpGet]
